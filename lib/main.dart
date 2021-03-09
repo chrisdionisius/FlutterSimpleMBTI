@@ -163,6 +163,7 @@ class _MyAppState extends State<MyApp> {
   var trait = '';
   var keterangan = '';
   var gambar = '';
+  List<String> pertanyaan = [];
 
   var hasil = List(4);
 
@@ -175,6 +176,9 @@ class _MyAppState extends State<MyApp> {
   void questionsList() {
     for (int i = 0; i < _pertanyaan.length; ++i) {
       int f = i + 1;
+
+      pertanyaan.add('question$i');
+
       questions.add(
         Container(
           margin: EdgeInsets.only(top: 20),
@@ -186,30 +190,64 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       );
-      questions.add(
-        RadioListTile(
-            value: _score[i][0],
-            title: Text(
-              _jawaban[i][0],
-            ),
-            groupValue: 'question$i',
-            onChanged: (value) {
-              hasil[i] = value;
-              print(value);
-              print(hasil);
-            }),
-      );
-      questions.add(
-        RadioListTile(
-            value: _score[i][1],
-            title: Text(_jawaban[i][1]),
-            groupValue: 'question$i',
-            onChanged: (value) {
-              hasil[i] = value;
-              print(value);
-              print(hasil);
-            }),
-      );
+
+      questions.add(Container(
+        child: Column(
+          children: [
+            RadioListTile(
+                value: _score[i][0],
+                title: Text(
+                  _jawaban[i][0],
+                ),
+                groupValue: pertanyaan[i],
+                onChanged: (value) {
+                  hasil[i] = value;
+                  print('group value : ' + pertanyaan[i]);
+                  print('score' + _score[i][0]);
+                }),
+            RadioListTile(
+                value: _score[i][1],
+                title: Text(_jawaban[i][1]),
+                groupValue: pertanyaan[i],
+                onChanged: (value) {
+                  hasil[i] = value;
+                  print('group value : ' + pertanyaan[i]);
+                  print('score' + _score[i][1]);
+                }),
+          ],
+        ),
+      ));
+
+      // questions.add(
+      //   RadioListTile(
+      //       value: _score[i][0],
+      //       title: Text(
+      //         _jawaban[i][0],
+      //       ),
+      //       groupValue: pertanyaan[i],
+      //       onChanged: (value) {
+      //         hasil[i] = value;
+      //         // print(value);
+      //         // print(hasil);
+      //         pertanyaan[i] = value;
+      //         print('isi pertanyaan' + pertanyaan[i]);
+      //         print('score' + _score[i][0]);
+      //       }),
+      // );
+      // questions.add(
+      //   RadioListTile(
+      //       value: _score[i][1],
+      //       title: Text(_jawaban[i][1]),
+      //       groupValue: pertanyaan[i],
+      //       onChanged: (value) {
+      //         hasil[i] = value;
+      //         // print(value);
+      //         // print(hasil);
+      //         pertanyaan[i] = value;
+      //         print('isi pertanyaan' + pertanyaan[i]);
+      //         print('score' + _score[i][1]);
+      //       }),
+      // );
     }
   }
 
