@@ -2,12 +2,53 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ListPertanyaan extends StatelessWidget {
-  final pertanyaan;
+  final pertanyaan = const [
+    [
+      ['Minggu ini rasanya berat, kira-kira rencana weekend mu apa sih?', ''],
+      ['Nelpon temen ah, ajakin main, hangout seru nih', 'E'],
+      ['Banyak film baru nih, buka netflix ah, wait matiin notif WA dulu', 'I']
+    ],
+    [
+      ['Kamu lebih seperti....', ''],
+      [
+        'Memikirkan keadaan sekarang dan berpikir bagaimana mengatasi situasi saat ini',
+        'S'
+      ],
+      [
+        'Memikirkan kondisi kedepan, fakta-fakta itu cukup membosankan, mari membicarakan peluang',
+        'N'
+      ],
+    ],
+    [
+      [
+        'Kamu dapet tawaran dari perusahaan kompetitor untuk bekerja disana, katanya sih gaji nya lebih tinggi, tapi karyawan disini udah klop banget, lagipula kepala divisi mu ngasih kode semisal dia pensiun dia bakal nunjuk kamu sebagai penggantinya, mending ....',
+        ''
+      ],
+      [
+        'Konsultasi dulu, buat daftar perbandingan, tanya HR, nyari informasi di jobstreet, berpikir dengan kepala dingin',
+        'T'
+      ],
+      [
+        'Pake feeling aja, toh sebelumnya bisa kerja disini karena ngerasa udah cocok sama jobdesk dan lainnya',
+        'F'
+      ],
+    ],
+    [
+      ['Dua minggu lagi si A nikahan, kira-kira persiapan mu gimana sih ?', ''],
+      [
+        'Siapin playlist jaman sekolah buat di request ke pemain musiknya, mix-match baju buat berangkat, nyiapin kado pernikahan',
+        'J'
+      ],
+      [
+        'Apa itu rencana, toh acaranya pasti bakal meriah banget, go with the flow aja, biasanya hal-hal baik terjadi secara spontan',
+        'P'
+      ]
+    ]
+  ];
   final score;
   final hasil;
   final Function stateMethod;
-  const ListPertanyaan(
-      {Key key, this.pertanyaan, this.score, this.hasil, this.stateMethod})
+  const ListPertanyaan({Key key, this.score, this.hasil, this.stateMethod})
       : super(key: key);
 
   @override
