@@ -1,14 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
+import 'Hasil.dart';
+import 'Judul.dart';
+import 'ListPertanyaan.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
-
-// enum SingingCharacter { lafayette, jefferson }
 
 final _pertanyaan = const [
   [
@@ -170,85 +172,31 @@ final _alignment = const [
 ];
 
 class _MyAppState extends State<MyApp> {
-  // SingingCharacter _character = SingingCharacter.lafayette;
-
-  List<String> _score = [];
-
-  var kepribadian = '';
-  var profesi = '';
-  var trait = '';
-  var keterangan = '';
-  var gambar = '';
-
-  String selectedRadioTile = '';
-
+  List<String> _score = List<String>();
   var hasil = List(4);
 
-  List<Widget> questions = [];
-
-  _MyAppState() {
-    questionsList();
+  void stateMethod() {
+    setState(() {});
   }
 
-  void questionsList() {
-    for (int i = 0; i < _pertanyaan.length; ++i) {
-      int f = i + 1;
-      questions.add(
-        Container(
-          margin: EdgeInsets.only(top: 20),
-          decoration: BoxDecoration(color: Colors.blue),
-          width: double.infinity,
-          child: Text(
-            '$f. ' + _pertanyaan[i][0][0],
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      );
-
-      questions.add(Container(
-        child: Column(
-          children: [
-            RadioListTile(
-              value: _pertanyaan[i][1][1],
-              title: Text(_pertanyaan[i][1][0]),
-              groupValue: selectedRadioTile,
-              onChanged: (value) {
-                hasil[i] = value;
-                setState(() {
-                  selectedRadioTile = value;
-                });
-              },
-            ),
-            RadioListTile(
-              value: _pertanyaan[i][2][1],
-              title: Text(_pertanyaan[i][2][0]),
-              groupValue: selectedRadioTile,
-              onChanged: (value) {
-                hasil[i] = value;
-                setState(() {
-                  selectedRadioTile = value;
-                });
-              },
-            ),
-          ],
-        ),
-      ));
-    }
-  }
+  var analisis = {
+    'Tipe': '',
+    'Karakter': '',
+    'Keterangan': '',
+    'Profesi': '',
+    'Gambar': ''
+  };
 
   void display() {
-    kepribadian = '';
-    for (int i = 0; i < hasil.length; i++) {
-      kepribadian += hasil[i];
-    }
+    analisis['Tipe'] = '';
+    for (int i = 0; i < hasil.length; i++) analisis['Tipe'] += hasil[i];
     setState(() {
       for (var i = 0; i < _alignment.length; i++) {
-        if (kepribadian == _alignment[i][0]) {
-          kepribadian = _alignment[i][0];
-          trait = _alignment[i][1];
-          keterangan = _alignment[i][2];
-          profesi = 'Profesi : ' + _alignment[i][3];
-          gambar = _alignment[i][4];
+        if (analisis['Tipe'] == _alignment[i][0]) {
+          analisis['Karakter'] = _alignment[i][1];
+          analisis['Keterangan'] = _alignment[i][2];
+          analisis['Profesi'] = 'Profesi : ' + _alignment[i][3];
+          analisis['Gambar'] = _alignment[i][4];
         }
       }
     });
@@ -258,125 +206,40 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: const Color(0xff252c48),
         appBar: AppBar(
           title: Text("Latihan listview"),
         ),
         body: ListView(children: [
-          Container(
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(5),
-            child: Text(
-              'Cek Tipe Kepribadian Kamu',
-              style: TextStyle(
-                fontSize: 20,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Column(
-            children: List.generate(_pertanyaan.length, (index) {
-              int f = index + 1;
-              if (_score[index] == null) {
-                _score.add('');
-              }
-              return Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    decoration: BoxDecoration(color: Colors.blue),
-                    width: double.infinity,
-                    child: Text(
-                      '$f. ' + _pertanyaan[index][0][0],
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  RadioListTile(
-                    value: _pertanyaan[index][1][1],
-                    title: Text(_pertanyaan[index][1][0]),
-                    groupValue: _score[index],
-                    onChanged: (value) {
-                      hasil[index] = value;
-                      setState(() {
-                        _score[index] = value;
-                      });
-                    },
-                  ),
-                  RadioListTile(
-                    value: _pertanyaan[index][2][1],
-                    title: Text(_pertanyaan[index][2][0]),
-                    groupValue: _score[index],
-                    onChanged: (value) {
-                      hasil[index] = value;
-                      setState(() {
-                        _score[index] = value;
-                      });
-                    },
-                  ),
-                ],
-              );
-            }),
-          ),
-          // Column(
-          //   children: <Widget>[
-          //     ListTile(
-          //       title: const Text('Lafayette'),
-          //       leading: Radio<SingingCharacter>(
-          //         value: SingingCharacter.lafayette,
-          //         groupValue: _character,
-          //         onChanged: (SingingCharacter value) {
-          //           setState(() {
-          //             _character = value;
-          //           });
-          //         },
-          //       ),
-          //     ),
-          //     ListTile(
-          //       title: const Text('Thomas Jefferson'),
-          //       leading: Radio<SingingCharacter>(
-          //         value: SingingCharacter.jefferson,
-          //         groupValue: _character,
-          //         onChanged: (SingingCharacter value) {
-          //           setState(() {
-          //             _character = value;
-          //           });
-          //         },
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          SizedBox(
-            width: double.infinity,
-            child: RaisedButton(
-              onPressed: display,
-              color: Colors.amber,
-              child: Text(
-                'Kalkulasi',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            child: Column(
-              children: [
-                Text(
-                  '$kepribadian',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  '$trait',
-                  style: TextStyle(fontSize: 25),
-                ),
-                Image.network('$gambar'),
-                Text('$keterangan'),
-                Text(
-                  '$profesi',
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-              ],
-            ),
-          )
+          Judul(),
+          ListPertanyaan(
+              pertanyaan: _pertanyaan,
+              score: _score,
+              hasil: hasil,
+              stateMethod: stateMethod),
+          Kalkulasi(),
+          Hasil(analisis: analisis)
         ]),
+      ),
+    );
+  }
+
+  SizedBox Kalkulasi() {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: display,
+        style: ElevatedButton.styleFrom(
+          primary: Colors.amber,
+          padding: EdgeInsets.symmetric(vertical: 20),
+          shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(15.0),
+          ),
+        ),
+        child: Text(
+          'Kalkulasi',
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
       ),
     );
   }
