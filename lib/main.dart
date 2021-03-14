@@ -172,6 +172,8 @@ final _alignment = const [
 class _MyAppState extends State<MyApp> {
   // SingingCharacter _character = SingingCharacter.lafayette;
 
+  List<String> _score = [];
+
   var kepribadian = '';
   var profesi = '';
   var trait = '';
@@ -272,7 +274,47 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
           Column(
-            children: questions,
+            children: List.generate(_pertanyaan.length, (index) {
+              int f = index + 1;
+              if (_score[index] == null) {
+                _score.add('');
+              }
+              return Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    decoration: BoxDecoration(color: Colors.blue),
+                    width: double.infinity,
+                    child: Text(
+                      '$f. ' + _pertanyaan[index][0][0],
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  RadioListTile(
+                    value: _pertanyaan[index][1][1],
+                    title: Text(_pertanyaan[index][1][0]),
+                    groupValue: _score[index],
+                    onChanged: (value) {
+                      hasil[index] = value;
+                      setState(() {
+                        _score[index] = value;
+                      });
+                    },
+                  ),
+                  RadioListTile(
+                    value: _pertanyaan[index][2][1],
+                    title: Text(_pertanyaan[index][2][0]),
+                    groupValue: _score[index],
+                    onChanged: (value) {
+                      hasil[index] = value;
+                      setState(() {
+                        _score[index] = value;
+                      });
+                    },
+                  ),
+                ],
+              );
+            }),
           ),
           // Column(
           //   children: <Widget>[
