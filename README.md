@@ -1,6 +1,18 @@
 # simple_mbti
 
-A new Flutter project.
+#### Aplikasi ini adalah aplikasi analisis kepribadian sederhana yang dirancang dengan metode MBTI
+
+>MBTI adalah singkatan dari Myers-Birggs Type Indicator. Tes yang dirancang untuk mengkategorikan individu berdasarkan bagaimana mereka berpikir dan bertingkah laku. <br> Penasaran tipe kepribadian yang mana dirimu? Yuk, ikuti tes kepribadian berikut untuk mengetahui, sebenarnya kamu masuk tipe kerpibadian apa.
+
+# Screenshot Aplikasi
+
+![screenshot](img/capture.gif)
+
+## Informasi Mahasiswa
+Nama : Dionisius D. Yapenrui <br>
+NIM : 1931710111 <br>
+Kelas : MI-2B
+
 
 ## Getting Started
 
